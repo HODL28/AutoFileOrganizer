@@ -1,0 +1,39 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "autofileorganizer"
+version = "1.0.0"
+description = "A CLI tool to automatically organize files into folders based on their extensions."
+readme = "README.md"
+requires-python = ">=3.9"  # We make it compatible with 3.9+ just in case, but target 3.12
+license = { text = "MIT" }
+authors = [
+    { name = "Clement", email = "clement@example.com" }
+]
+dependencies = [
+    "typer>=0.12.0",
+    "rich>=13.0.0",
+]
+
+[project.scripts]
+organize = "autofileorganizer.cli:app"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/autofileorganizer"]
+
+[tool.pytest.ini_options]
+minversion = "6.0"
+addopts = "-ra -q --cov=src/autofileorganizer --cov-report=term-missing"
+testpaths = [
+    "tests",
+]
+
+[tool.ruff]
+target-version = "py39"
+line-length = 88
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "N", "UP", "B", "A", "C4", "SIM", "ARG", "PTH"]
+ignore = ["B008", "ARG001"]
